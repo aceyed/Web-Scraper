@@ -1,0 +1,6 @@
+object address  : 0000028E77B40B80
+object refcount : 2
+object type     : 00007FF87BCDDA90
+object type name: TypeError
+object repr     : TypeError("WebDriver.__init__() got an unexpected keyword argument 'executable_path'")
+lost sys.stderr

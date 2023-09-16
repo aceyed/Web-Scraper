@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Card Price Scraper</title>
+</head>
+<body>
+    <h1>Pokémon Card Price Scraper</h1>
+    <form id="pokemonForm">
+        <label for="pokemonName">Pokemon Name:</label>
+        <input type="text" id="pokemonName" name="pokemonName" required><br><br>
+        
+        <label for="pokemonNumber">Pokemon Number:</label>
+        <input type="text" id="pokemonNumber" name="pokemonNumber" required><br><br>
+        
+        <label for="pokemonSet">Pokemon Set:</label>
+        <input type="text" id="pokemonSet" name="pokemonSet" required><br><br>
+        
+        <button type="submit">Get Prices</button>
+    </form>
+    
+    <div id="results"></div>
+    <div id="status"></div>
+    
+    <!-- Add this code block to your index.html -->
+<script>
+    const form = document.getElementById("pokemonForm");
+    const resultsDiv = document.getElementById("results");
+    const statusDiv = document.getElementById("status");
+    const pollInterval = 5000; // Poll every 5 seconds (adjust as needed)
+    
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const pokemonData = {
+            pokemonName: formData.get("pokemonName"),
+            pokemonNumber: formData.get("pokemonNumber"),
+            pokemonSet: formData.get("pokemonSet")
+        };
+        
+        resultsDiv.innerHTML = "Fetching prices...";
+        
+        const response = await fetch("/get_prices", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(pokemonData),
+        });
+        
+        if (response.ok) {
+            resultsDiv.innerHTML = "Web scraping process initiated. Checking results...";
+            pollForResult();
+        } else {
+            resultsDiv.innerHTML = "Error initiating web scraping process.";
+        }
+    });
+
+    async function pollForResult() {
+        const response = await fetch("/get_status");
+        const statusData = await response.json();
+        
+        if (statusData.status === "running") {
+            // Results are still pending, continue polling
+            setTimeout(pollForResult, pollInterval);
+        } else if (statusData.status === "finished") {
+            // Results are ready, display them
+            resultsDiv.innerHTML = "Web scraping process completed!";
+            // You can add code here to fetch and display the results if needed
+        } else {
+            // Handle other status states as needed
+            statusDiv.innerHTML = "Web scraping process encountered an error.";
+        }
+    }
+</script>
+
+</body>
+</html>
