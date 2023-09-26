@@ -1,12 +1,12 @@
 # Web-Scraper
 Web scraper that checks price of user specified pokemon card from 2 sources
 
-1. Static directory contains index.html and script.js files. Run app.py to view website on local machine.
+1. "static" directory contains index.html and script.js files. Run app.py to view website on local machine.
 
 2. Below is the initial webpage
 ![image](https://github.com/aceyed/Web-Scraper/assets/121588657/e53ef478-9096-49ae-aa1d-3760ff8102d9)
 
-3. User enters pokemon card name, number and set name. Clicks "Check price".  
+3. User enters pokemon card name, number and set name. Clicks "Check Price".  
 ![image](https://github.com/aceyed/Web-Scraper/assets/121588657/9c288d87-5ba9-4aed-a9af-4cf7f4987d1d)
 
 4. On backend, input data validation, site url construction and web scraping of price and card data is occuring while
