@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <h3 class="result-heading">All Prices in $USD for ${data.productName}</h3>
                 <p>Price from Price Charting: ${data.priceChartingPrice}</p>
                 <p>Price from PokeData: ${data.pokeDataPrice}</p>
-                <p>Average Price: ${data.averagePrice}</p>
+                <p>Average Price: $${data.averagePrice}</p>
             `;
         }
     }

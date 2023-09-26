@@ -113,6 +113,7 @@ def get_pokemon_price():
             r_priceNum = float(r_price.replace("$", ""))
             raw_priceNum = float(raw_price.replace("$", ""))
             average_price = (raw_priceNum + r_priceNum) / 2
+            average_price = "{:.2f}".format(average_price)
 
             # Create a JSON response
             response_data = {
